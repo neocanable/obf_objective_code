@@ -47,13 +47,10 @@ convert_images() {
 	files=$(find $project_dir -type f -iregex ".*$image_type\$" | grep -v .git)
 	for file in $files
 	do
-		compressed_file=$(echo $file | awk -F '/' '{print $(NF-1)"_"$NF}')
-		if [[ ! -d "conver_image_tmp" ]]; then
-			mkdir conver_image_tmp
-		fi
-		echo "convert $file -quality $quality conver_image_tmp/$compressed_file"
-		convert $file -quality $quality conver_image_tmp/$compressed_file
-		mv conver_image_tmp/$compressed_file $file
+		compressed_file=$(echo $file | awk -F '/' '{print $(NF-1)"_"$NF}')		
+		echo "convert $file -quality $quality compress_working_dir/$compressed_file"
+		convert $file -quality $quality compress_working_dir/$compressed_file
+		mv compress_working_dir/$compressed_file $file
 		# echo "i will mv $file to conver_image_tmp/$compressed_file"
 	done
 }
@@ -77,4 +74,4 @@ done
 
 prepare_working_dir
 convert_images $project_dir $image_type $quality
-
+clear_working_dir
