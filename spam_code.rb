@@ -1,19 +1,5 @@
 require 'pry'
-
-# TODO
-class String
-  def match_interface?
-    self =~ /\s*@interface/ and !(self =~ /\/\/\s*@interface/)
-  end
-
-  def match_end?
-    self =~ /\s*@end/ and !(self =~ /\/\/\s*@end/)
-  end
-
-  def match_impl?
-    self =~ /\s*@implementation/ and !(self =~ /\/\/\s*@implementation/)
-  end
-end
+require 'ext/string'
 
 class SpamCode
   def initialize(oc_klass_file_name, need_replace = false)
